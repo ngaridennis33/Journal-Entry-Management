@@ -24,7 +24,7 @@ export default function App() {
                 <Text className="text-3xl text-white font-bold text-center">
                     Discover Endless{"\n"}
                     Posibilities with{" "}
-                    <Text className="text-secondary-100"> Aora</Text>
+                    <Text className="text-secondary-100"> DayNote</Text>
                 </Text>
                 <Image
                     source={images.path}
