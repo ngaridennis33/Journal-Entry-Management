@@ -10,7 +10,7 @@
 6. 🔗 [Links](#links)
 
 # Introduction
-Built with React Native for seamless user experiences, Expo for effortless development, Nativewind for beautiful styling, and TypeScript for robust code, this app showcases impressive design and functionality, enabling smooth and intuitive journaling on the go.
+Built with React Native for seamless user experiences, Expo for effortless development, Nativewind for beautiful styling, and Tailwind CSS for robust code, this app showcases impressive design and functionality, enabling smooth and intuitive journaling on the go.
 
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
@@ -47,7 +47,7 @@ Plus, many more features, including scalable code architecture and reusability.
 
 Follow these steps to set up the project locally on your machine.
 
-## Installation 
+## Create the project
 ```npx create-expo-app@latest [your-app-name] --template    blank@latest ```
 
 ### Navigate into your app
@@ -59,7 +59,11 @@ Follow these steps to set up the project locally on your machine.
 ``` npx expo install expo-router react-native-safe-area-context react-native-screens expo-linking expo-constants expo-status-bar ```
 
 ### Setup entry point 
+For the property main, use the expo-router/entry as its value in the package.json. The initial client file is app/_layout.js.
+
 ```javascript
+// package.json
+
 {
   "main": "expo-router/entry"
 } 
@@ -70,11 +74,13 @@ Follow these steps to set up the project locally on your machine.
 app.json ``` "scheme": "your-app-scheme" ```
 
 ### Install Native wind for styling and dev dependacies for Tailwind css
+- tailwindcss is not used during runtime so it can be added as a development dependency.
+
 ``` npm install nativewind 
     npm install --save-dev tailwindcss@3.3.2
 ```
 
-### Setup Tailwins css
+### Setup Tailwind CSS
 Run ``` npx tailwindcss init ``` to create a tailwind.config.js file
 
 - Add the paths to all of your component files in your tailwind.config.js file. Remember to replace <custom directory> with the actual name of your directory e.g. screens.
@@ -106,6 +112,14 @@ module.exports = function (api) {
   };
 };
 ```
+
+### Clear bundler cache 
+- run the following command to clear the bundler cache and start the app.
+``` npx expo start -c ```
+
+**Expo Go**
+
+Download the [Expo Go](https://expo.dev/go) app onto your device, then use it to scan the QR code from Terminal and run.
 
 ## <a name="snippets">🕸️ Snippets</a>
 - Fonts and color theme used in the app
@@ -147,14 +161,6 @@ module.exports = {
   plugins: [],
 };
 ```
-
-### Clear bundler cache 
-- run the following command to clear the bundler cache and start the app.
-``` npx expo start -c ```
-
-**Expo Go**
-
-Download the [Expo Go](https://expo.dev/go) app onto your device, then use it to scan the QR code from Terminal and run.
 
 ## <a name="links">🔗 Links</a>
 
