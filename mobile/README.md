@@ -1,4 +1,4 @@
-# Journal Management App (DayNote)
+# React Native-Expo Journal Management Mobile App
 
 ## 📋 <a name="table">Table of Contents</a>
 
