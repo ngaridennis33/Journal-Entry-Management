@@ -28,7 +28,7 @@ const SignIn = () => {
                 className="w-[115px] h-[53px]"
                 />
                 <Text className="text-2xl text-white font-psemibold text-semibold mt-10">
-                    Log In to Aora
+                    Log In to DayNote
                 </Text>
 
                 <FormField
