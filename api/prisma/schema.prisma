@@ -1,0 +1,65 @@
+// Define the Prisma Client generator configuration
+generator client {
+    provider = "prisma-client-js"
+    }
+    
+    // Define the PostgreSQL datasource configuration
+    datasource db {
+    provider = "postgresql"
+    url = env("DATABASE_URL")
+    }
+    
+    //********* Define the User model for representing users in the database ******//
+    model User {
+    id String @id @default(uuid()) // Primary key field with a default value generated using the uuid() function
+    name String @db.VarChar(255) // User's name, stored as a VARCHAR(255) in the database
+    email String @unique // User's email, unique across all users
+    image String? @default("default.png") // User's image path with a default value of "default.png"
+    verified Boolean? @default(false) // Boolean flag indicating whether the user is verified, default is false
+    password String // User's password
+    role RoleEnumType? @default(user) // User's role, an enumerated type with a default value of "user"
+    provider String? // Provider information, such as OAuth provider (e.g., Google, Facebook)
+    
+    // Password reset token and timestamp for password reset
+    passwordResetToken String?
+    passwordResetAt DateTime?
+    
+    verificationCode String? @unique @db.Text // Verification code for email confirmation, stored as TEXT in the database
+    
+    // Timestamps for creation and last update
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    
+    
+    // Define a unique constraint on a combination of fields
+    @@unique([email, verificationCode, passwordResetToken])
+    // Define an index on specified fields
+    @@index([email, verificationCode, passwordResetToken])
+    @@map(name: "users") // Set the database table name to "users"
+    }
+    
+    // Define the enumerated type for user roles (markdown style)
+    enum RoleEnumType {
+    user
+    admin
+    }
+
+    //******** Define the Product model for representing products in the database ********//
+    model Journal {
+    id String @id @default(uuid()) // Primary key field with a default value generated using the uuid() function
+    title String // Name of the product
+    description String? // Optional description of the product
+    // Timestamps for when the product was created and last updated
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    category JournalCategory // Category field now uses the JournalCategory enum
+    
+    @@map(name: "journals") // Set the database table name to "products"
+    }
+
+  // Define the JournalCategory enum for restricting category values
+enum JournalCategory {
+    PERSONAL
+    TRAVEL
+    WORK
+}
