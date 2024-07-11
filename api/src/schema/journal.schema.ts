@@ -11,7 +11,7 @@ export const createJournalSchema = object({
         }),
         category: nativeEnum(CategoryEnumType, {
             required_error: "Category is required",
-            invalid_type_error: "Category must be a valid enum value",
+            invalid_type_error: "Category is NOT valid",
         })
     })
 });
@@ -24,10 +24,18 @@ export const updateJournalSchema = object({
         title: string({}).optional(),
         description: string({}).optional(),
         category: nativeEnum(CategoryEnumType, {
-            invalid_type_error: "Category must be a valid enum value",
+            invalid_type_error: "Category is NOT valid",
         }).optional(),
     })
 });
+
+export const categorySchema = object({
+    params: object({
+        category: nativeEnum(CategoryEnumType, {
+            invalid_type_error: "Category is NOT valid",
+        })
+    })
+})
 
 export const deleteJournalSchema = object({
     params: object({
@@ -37,4 +45,5 @@ export const deleteJournalSchema = object({
 
 export type JournalInput = TypeOf<typeof createJournalSchema >['body'];
 export type UpdateJournalInput = TypeOf<typeof updateJournalSchema >;
+export type CategoryJournalInput = TypeOf<typeof categorySchema>["params"];
 export type DeleteJournalInput = TypeOf<typeof deleteJournalSchema>['params'];
