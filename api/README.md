@@ -66,6 +66,11 @@ npx prisma studio
 docker compose up -d
 ```
 
+### Running Migrations after Updating the prisma schema 
+```bash
+npx prisma migrate dev --name add-user-relation-to-journal
+```
+
 # Running the app
 ```npm run start```
 
