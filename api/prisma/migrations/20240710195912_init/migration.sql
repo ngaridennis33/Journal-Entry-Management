@@ -2,7 +2,7 @@
 CREATE TYPE "RoleEnumType" AS ENUM ('user', 'admin');
 
 -- CreateEnum
-CREATE TYPE "JournalCategory" AS ENUM ('PERSONAL', 'TRAVEL', 'WORK');
+CREATE TYPE "CategoryEnumType" AS ENUM ('PERSONAL', 'TRAVEL', 'WORK');
 
 -- CreateTable
 CREATE TABLE "users" (
@@ -30,7 +30,7 @@ CREATE TABLE "journals" (
     "description" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "category" "JournalCategory" NOT NULL,
+    "category" "CategoryEnumType" NOT NULL,
 
     CONSTRAINT "journals_pkey" PRIMARY KEY ("id")
 );
