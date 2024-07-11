@@ -59,7 +59,7 @@ generator client {
 
   // Define the JournalCategory enum for restricting category values
 enum CategoryEnumType {
-    PERSONAL
-    TRAVEL
-    WORK
+    personal
+    travel
+    work
 }
