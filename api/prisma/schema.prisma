@@ -52,13 +52,13 @@ generator client {
     // Timestamps for when the product was created and last updated
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
-    category JournalCategory // Category field now uses the JournalCategory enum
+    category CategoryEnumType // Category field now uses the JournalCategory enum
     
     @@map(name: "journals") // Set the database table name to "products"
     }
 
   // Define the JournalCategory enum for restricting category values
-enum JournalCategory {
+enum CategoryEnumType {
     PERSONAL
     TRAVEL
     WORK
