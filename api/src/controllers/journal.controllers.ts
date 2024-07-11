@@ -12,11 +12,17 @@ export const createJournalHandler = async(
     next: NextFunction
 ) => {
     try {
+        const user = res.locals.user;
         const { title, description, category } = req.body;
         const journal = await createJournalService({
             title: title,
             description: description,
-            category: category
+            user: {
+                connect: {
+                    id: user.id,
+                },
+            },
+            category: category,
         })
 
         res.status(200).json({
@@ -40,7 +46,9 @@ export const getAllJournalsHandler = async(
 ) => {
     try {
         
-        const journals = await getAllJournalsService();
+        const user = res.locals.user;
+
+        const journals = await getAllJournalsService(user.id);
         res.status(200).json({
             status: 'success',
             data: journals
@@ -60,9 +68,11 @@ export const getSpecificJournalsHandler = async(
 ) => {
     try {
 
+        const user = res.locals.user;
+
         const { id } = req.params;
 
-        const journal = await findJournalService({ id });
+        const journal = await findJournalService({ id, userId: user.id });
 
         if(!journal){
             return res.status(404).json({
@@ -90,8 +100,11 @@ export const getJournalByCategoryHandler = async(
     next:NextFunction
 ) => {
     try {
+        
+        const user = res.locals;
+
         const { category } = req.params;
-        const journals = await findJournalByCategoryService({category})
+        const journals = await findJournalByCategoryService({category, userId: user.id})
         
         if(!journals){
             return next(new AppError(404, 'Category Does NOT exist'))
@@ -117,9 +130,12 @@ export const updateJournalHandler = async(
 ) => {
     try {
 
+        const user = res.locals;
+
         const { id } = req.params;
         const { title, description, category } = req.body;
-        const journal = await findJournalService({id});
+
+        const journal = await findJournalService({ id, userId: user.id });
         
         if(!journal) {
             return next (new AppError(404, 'Journal does Not Exist'))
@@ -153,8 +169,12 @@ export const deleteJournalHandler = async(
     next: NextFunction
 ) => {
     try {
+
+        const user = res.locals;
+
         const { id } = req.params;
-        const journal = await findJournalService({id});
+        
+        const journal = await findJournalService({ id, userId: user.id });
 
         if(!journal){
             return next(new AppError(404, 'Journal Does NOT exist'))
