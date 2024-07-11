@@ -13,6 +13,7 @@ export const createJournalHandler = async(
 ) => {
     try {
         const user = res.locals.user;
+        
         const { title, description, category } = req.body;
         const journal = await createJournalService({
             title: title,
@@ -173,7 +174,7 @@ export const deleteJournalHandler = async(
         const user = res.locals;
 
         const { id } = req.params;
-        
+
         const journal = await findJournalService({ id, userId: user.id });
 
         if(!journal){
