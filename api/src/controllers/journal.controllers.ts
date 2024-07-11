@@ -1,8 +1,7 @@
 import { NextFunction, request, Request, Response } from "express";
-import { DeleteJournalInput, JournalInput, UpdateJournalInput } from "../schema/journal.schema";
+import { CategoryJournalInput, DeleteJournalInput, JournalInput, UpdateJournalInput } from "../schema/journal.schema";
 import { createJournalService, deleteJournalService, findJournalByCategoryService, findJournalService, getAllJournalsService, updateJournalService } from "../services/journalService";
 import AppError from "../utils/appError";
-import { CategoryEnumType } from "@prisma/client";
 
 
 // Create a New Journal
@@ -86,13 +85,22 @@ export const getSpecificJournalsHandler = async(
 // Get Journal By Category
 
 export const getJournalByCategoryHandler = async(
-    req: Request,
+    req: Request<CategoryJournalInput>,
     res: Response,
     next:NextFunction
 ) => {
     try {
-
         const { category } = req.params;
+        const journals = await findJournalByCategoryService({category})
+        
+        if(!journals){
+            return next(new AppError(404, 'Category Does NOT exist'))
+        }
+        
+        res.status(200).json({
+            status: 'success',
+            data: journals
+        })
 
     } catch (error: any) {
         next(error)
