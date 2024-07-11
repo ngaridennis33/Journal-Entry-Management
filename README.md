@@ -1,10 +1,9 @@
 Project Overview
 ============================
-
-- [About the Project](#star2-about-the-project)
+### About the Project
 This repository contains two main folders: mobile and api. The mobile folder is dedicated to the mobile application, which is built using React Native with Expo. The api folder houses the backend of the application, which is developed using Express.js and TypeScript.
 
-Figma design used in this project: https://www.figma.com/design/yFV3zEmrWeYNjCSuXm8HlK/Journal?node-id=0-1&t=KVQrlFHuhlOgcOkq-0
+Figma design Mobile App: https://www.figma.com/design/yFV3zEmrWeYNjCSuXm8HlK/Journal?node-id=0-1&t=KVQrlFHuhlOgcOkq-0
 
 
 ### Folder Structure
@@ -31,3 +30,5 @@ Below are the images of the design for the mobile app.
 ![micro](https://github.com/ngaridennis33/Journal-Entry-Management/blob/main/images/Week.png)
 
 > Feel free to explore the repository and refer to the respective folders for more details on the implementation of the mobile app and the backend API.
+
+### Application status: BETA
