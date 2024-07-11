@@ -15,20 +15,33 @@ export const createJournalService = async (input: Prisma.JournalCreateInput) => 
 // Get All Journals
 
 export const getAllJournalsService = async(
-
+    userId: string
 ) => {
-    return (await prisma.journal.findMany());
+    return (await prisma.journal.findMany({
+        where: {
+            userId,
+        }
+    }));
 }
 
 
 // Get Specific journal
 
 export const findJournalService = async(
-    where: Prisma.JournalWhereUniqueInput,
+    where: Prisma.JournalWhereUniqueInput & { userId?: string },
     select?: Prisma.JournalSelect
 ) => {
+
+    const {id, userId, ...rest} = where;
+
+    //  Query:
+    const query: Prisma.JournalWhereUniqueInput = {
+        id,
+        ...(userId && { userId}),
+        ...rest
+    };
     return ( await prisma.journal.findUnique({
-        where,
+        where: query,
         select,
     })) as Journal;
 }
@@ -37,11 +50,16 @@ export const findJournalService = async(
 // Get Journal By Category
 
 export const findJournalByCategoryService = async(
-    where: Prisma.JournalWhereInput,
+    where: Prisma.JournalWhereInput & {userId?: string},
     select?: Prisma.JournalSelect
 ) => {
+    const {id, userId, ...rest} = where;
+
     return ( await prisma.journal.findMany({
-        where,
+        where:{
+            ...rest,
+            userId
+        },
         select,
     })) as Journal[];
 }
