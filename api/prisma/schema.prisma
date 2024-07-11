@@ -18,6 +18,7 @@ generator client {
     verified Boolean? @default(false) // Boolean flag indicating whether the user is verified, default is false
     password String // User's password
     role RoleEnumType? @default(user) // User's role, an enumerated type with a default value of "user"
+    journals  Journal[]
     provider String? // Provider information, such as OAuth provider (e.g., Google, Facebook)
     
     // Password reset token and timestamp for password reset
@@ -49,6 +50,9 @@ generator client {
     id String @id @default(uuid()) // Primary key field with a default value generated using the uuid() function
     title String // Name of the product
     description String? // Optional description of the product
+    userId String           // Foreign key to the User model
+    user User             @relation(fields: [userId], references: [id]) // Establish relation to User model
+    
     // Timestamps for when the product was created and last updated
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
