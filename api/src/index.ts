@@ -9,6 +9,7 @@ import cors from "cors";
 import log from "./utils/logger";
 import AuthRouter from "./routes/auth.routes";
 import UserRouter from "./routes/user.routes";
+import JournalRouter from "./routes/journal.routes";
 import validateEnv from './utils/validateEnv';
 import AppError from './utils/appError';
 
@@ -41,11 +42,12 @@ async function bootstrap(){
 
 
     // ROUTES
-    app.use('/api/auth', AuthRouter);
-    app.use('/api/users', UserRouter);
+    app.use('/v1/api/auth', AuthRouter);
+    app.use('/v1/api/users', UserRouter);
+    app.use('/v1/api/journals', JournalRouter);
 
     // 6. Testing
-    app.get('/api/healthchecker', (_, res: Response) => {
+    app.get('/v1/api/healthchecker', (_, res: Response) => {
         res.status(200).json({
         status: 'success',
         message: 'Welcome to NodeJs with Prisma and PostgreSQL',
